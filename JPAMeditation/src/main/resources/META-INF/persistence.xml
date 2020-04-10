@@ -9,7 +9,7 @@
 		</provider>
 		
 		<!--entities  -->
-		<class>com.skilldistillery.meditation.entities.Dummy</class>
+		<class>com.skilldistillery.meditation.entities.Meditation</class>
 		
 		
 		

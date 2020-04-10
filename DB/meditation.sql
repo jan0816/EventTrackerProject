@@ -42,7 +42,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `meditationdb`;
-INSERT INTO `meditation` (`id`, `name`) VALUES (1, NULL);
+INSERT INTO `meditation` (`id`, `name`) VALUES (1, 'YEAH');
 
 COMMIT;
 

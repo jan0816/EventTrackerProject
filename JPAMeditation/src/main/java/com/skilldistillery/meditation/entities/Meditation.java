@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Dummy {
+public class Meditation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class Dummy {
 	private String name;
 
 	// METHODS BEGIN:
-	public Dummy() {
+	public Meditation() {
 
 	}
 
@@ -34,7 +34,7 @@ public class Dummy {
 		this.name = name;
 	}
 
-	public Dummy(int id, String name) {
+	public Meditation(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -56,7 +56,7 @@ public class Dummy {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Dummy other = (Dummy) obj;
+		Meditation other = (Meditation) obj;
 		if (id != other.id)
 			return false;
 		return true;
