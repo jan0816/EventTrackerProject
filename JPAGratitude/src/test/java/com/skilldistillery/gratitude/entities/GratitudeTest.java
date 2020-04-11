@@ -50,7 +50,7 @@ class GratitudeTest {
 		assertEquals("Meditation teachers", gratitude.getFirstGrat());
 		assertEquals("My meditation practice", gratitude.getSecondGrat());
 		assertEquals("Chakras", gratitude.getThirdGrat());
-		assertEquals(LocalDate.of(2020, 04, 11), gratitude.getDate());
+		assertEquals(LocalDate.now(), gratitude.getEntryDate());
 
 	}
 

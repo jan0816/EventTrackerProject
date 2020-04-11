@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `gratitude` (
   `first_gratitude` VARCHAR(200) NOT NULL,
   `second_gratitude` VARCHAR(200) NOT NULL,
   `third_gratitude` VARCHAR(200) NOT NULL,
-  `date` DATE NOT NULL,
+  `entry_date` DATE NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -45,8 +45,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `gratitudedb`;
-INSERT INTO `gratitude` (`id`, `first_gratitude`, `second_gratitude`, `third_gratitude`, `date`) VALUES (1, 'Meditation teachers', 'My meditation practice', 'Chakras', '2020-04-11');
-INSERT INTO `gratitude` (`id`, `first_gratitude`, `second_gratitude`, `third_gratitude`, `date`) VALUES (2, 'Pablo', 'Beautiful weather', 'Being healthy', '2020-04-10');
+INSERT INTO `gratitude` (`id`, `first_gratitude`, `second_gratitude`, `third_gratitude`, `entry_date`) VALUES (1, 'Meditation teachers', 'My meditation practice', 'Chakras', '2020-04-11');
+INSERT INTO `gratitude` (`id`, `first_gratitude`, `second_gratitude`, `third_gratitude`, `entry_date`) VALUES (2, 'Pablo', 'Beautiful weather', 'Being healthy', '2020-04-10');
 
 COMMIT;
 

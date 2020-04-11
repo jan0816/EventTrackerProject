@@ -1,10 +1,10 @@
-package com.skilldistillery.meditation;
+package com.skilldistillery.gratitude;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MeditationTrackerApplicationTests {
+class GratitudeTrackerApplicationTests {
 
 	@Test
 	void contextLoads() {

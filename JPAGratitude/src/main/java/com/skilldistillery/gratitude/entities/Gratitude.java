@@ -23,7 +23,8 @@ public class Gratitude {
 	private String secondGrat;
 	@Column(name = "third_gratitude")
 	private String thirdGrat;
-	private LocalDate date;
+	@Column(name = "entry_date")
+	private LocalDate entryDate;
 
 	// METHODS BEGIN:
 	public Gratitude() {
@@ -62,13 +63,14 @@ public class Gratitude {
 		this.thirdGrat = thirdGrat;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public LocalDate getEntryDate() {
+		return entryDate;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setEntryDate(LocalDate entryDate) {
+		this.entryDate = entryDate;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -101,22 +103,24 @@ public class Gratitude {
 		builder.append(firstGrat);
 		builder.append(", secondGrat=");
 		builder.append(secondGrat);
-		builder.append(", thirGrat=");
+		builder.append(", thirdGrat=");
 		builder.append(thirdGrat);
-		builder.append(", date=");
-		builder.append(date);
+		builder.append(", entryDate=");
+		builder.append(entryDate);
 		builder.append("]");
 		return builder.toString();
 	}
 
-	public Gratitude(int id, String firstGrat, String secondGrat, String thirdGrat, LocalDate date) {
+
+	public Gratitude(int id, String firstGrat, String secondGrat, String thirdGrat, LocalDate entryDate) {
 		super();
 		this.id = id;
 		this.firstGrat = firstGrat;
 		this.secondGrat = secondGrat;
 		this.thirdGrat = thirdGrat;
-		this.date = date;
+		this.entryDate = entryDate;
 	}
+
 	
 
 }
