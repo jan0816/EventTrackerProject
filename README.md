@@ -1,9 +1,12 @@
-### Event Tracker Project: Week 12 Homework for Skill Distillery
+#### Event Tracker Project: Week 12 Homework for Skill Distillery
+
+---
+### Overview
+> This project's purpose is to allow users to track their daily gratitudes. A user has to input three gratitudes for the day and will eventually be able to track their entries by filtering through dates on a calendar and/or by keyword.
 
 
-##Overview
 
-
+---
 ### **Table of REST endpoints**
 **HTTP Verb**| **URI**| **Request Body**|**Response Body**|**Purpose**|
 --------|--------|--------|--------|--------|
@@ -18,6 +21,8 @@
 ### How to Use
 
 
+
+---
 ### Technologies Used
 - MySQL
 - JPA
@@ -26,7 +31,7 @@
 - Spring REST
 - RESTful API
 - Postman
-
+---
 ### Lessons Learned
 
 - How to perform basic CRUD operations utilizing a RESTful API rather than JSPs.
