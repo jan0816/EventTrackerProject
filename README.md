@@ -19,11 +19,12 @@
 
 
 ### How to Use
-
+- Access this project via AWS. You can perform basic CRUD operations as mentioned above using the routes specified per operation. *This will get edited to reflect more once there's a front end.*
 
 
 ---
 ### Technologies Used
+- AWS
 - Gradle
 - MySQL
 - JPA
