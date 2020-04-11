@@ -24,10 +24,12 @@
 
 ---
 ### Technologies Used
+- Gradle
 - MySQL
 - JPA
 - JSON
 - Java
+- Spring Boot
 - Spring REST
 - RESTful API
 - Postman
