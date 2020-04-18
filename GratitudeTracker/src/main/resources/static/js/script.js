@@ -2,7 +2,6 @@ window.addEventListener('load', function (e) {
 	console.log('Window loaded.')
 	init();
 getAllEntries();
-	
 });
 
 function init(){
@@ -71,10 +70,8 @@ function displayNotFound(){
     var dataDiv = document.getElementById('eventData');
     dataDiv.textContent = 'Entry not found';
 }
-
 function createEntry(gratitude) {
 
-	//TODO: each time a new entry is made, make a new row and append to the table 
 	let gratitudeJson = JSON.stringify(gratitude);
 	let xhr = new XMLHttpRequest();
 	xhr.open('POST', 'api/gratitudes');
@@ -98,7 +95,24 @@ function createEntry(gratitude) {
 		}
 	}
 	xhr.send(gratitudeJson);
-	console.log(gratitudeJson);
+	
+	//ADDING A NEW ROW TO THE TABLE ONCE ENTRY IS MADE
+	let tableBody = document.getElementById('gratTable');
+	console.log(tableBody);
+    let tableRow = document.createElement('tr');
+    let tableRowDate = document.createElement('td');
+    let tableRowFirst = document.createElement('td');
+	let tableRowSecond = document.createElement('td');
+	let tableRowThird = document.createElement('td');
+    tableRowDate.textContent = gratitude['entryDate'];
+    tableRowFirst.textContent = gratitude['firstGrat'];
+	tableRowSecond.textContent = gratitude['secondGrat']; 
+	tableRowThird.textContent = gratitude['thirdGrat'];
+    tableRow.appendChild(tableRowDate);
+    tableRow.appendChild(tableRowFirst);
+	tableRow.appendChild(tableRowSecond);
+	tableRow.appendChild(tableRowThird);
+    tableBody.appendChild(tableRow);
 	
 }
 
@@ -122,6 +136,7 @@ function getAllEntries(){
         } 
     };
     xhr.send();
+
 }
 
  function displayAllEntries(entriesObj){
@@ -144,8 +159,9 @@ function getAllEntries(){
   	tableHead.appendChild(tableHeaderRow);
 	table.appendChild(tableHead);
 	  
-	let tableBody = document.createElement('tbody');
-	entriesObj.forEach((item) => {
+	let tableBody = document.createElement('tbody')
+	tableBody.setAttribute('id', 'gratTable');
+	entriesObj.forEach((gratitude) => {
  
     let tableRow = document.createElement('tr');
     let tableRowDate = document.createElement('td');
@@ -153,22 +169,52 @@ function getAllEntries(){
 	let tableRowSecond = document.createElement('td');
 	let tableRowThird = document.createElement('td');
 
-    tableRowDate.textContent = item['entryDate'];
-    tableRowFirst.textContent = item['firstGrat'];
-	tableRowSecond.textContent = item['secondGrat']; 
-	tableRowThird.textContent = item['thirdGrat'];
+    tableRowDate.textContent = gratitude['entryDate'];
+    tableRowFirst.textContent = gratitude['firstGrat'];
+	tableRowSecond.textContent = gratitude['secondGrat']; 
+	tableRowThird.textContent = gratitude['thirdGrat'];
 
     tableRow.appendChild(tableRowDate);
     tableRow.appendChild(tableRowFirst);
 	tableRow.appendChild(tableRowSecond);
 	tableRow.appendChild(tableRowThird);
     tableBody.appendChild(tableRow);
+    
+	tableRow.addEventListener('click', function(){
+		detailView(gratitude);
+		
+	})
   });
 	tableBody.border = '3px';
 	table.border = '5px';
 	table.appendChild(tableBody);
 	document.body.appendChild(table);
 }
+ 
+// function detailView(gratitude){
+//	 let elements = document.getElementById('gratTable');
+//	 for (var i = 0; i < elements.length; i++) {
+//	   elements[i].textContent = gratitudes[i].firstGrat;
+//	   elements[i].addEventListener('click', function(e){
+//	     
+//		   console.log(this.id + e.target);
+//		   
+//		    let first = document.querySelector('firstGrat');
+//		    let second = document.querySelector('secondGrat');
+//		    let third = document.querySelector('thirdGrat');
+//		 
+//		    first.textContent = gratitudes[this.id].firstGrat;
+//		    second.textContent = gratitudes[this.id].secondGrat;
+//		    third.textContent = gratitudes[this.id].thirdGrat;
+//		    let firstGratitudes = document.getElementById('eventData');
+//		    for (var i = 0; i < firstGratitudes.length; i++) {
+//		      firstGratitudes[i].style.backgroundColor = "white";
+//		    }
+//		    this.style.backgroundColor = "green";
+//	   });
+//	 }
+// }
+ 
 
  
 
