@@ -1,6 +1,8 @@
 window.addEventListener('load', function (e) {
 	console.log('Window loaded.')
 	init();
+getAllEntries();
+	
 });
 
 function init(){
@@ -64,15 +66,15 @@ function getEvent(gratId) {
       dataDiv.appendChild(thirdBlock);
       console.log(dataDiv);
      
-//    let ul = document.createElement('ul');
-//    console.log(ul);
-//    detailArray.forEach((item) => {
-//        let li = document.createElement('li');
-//        li.textContent = item;
-//        ul.appendChild(li);
-//    });
+// let ul = document.createElement('ul');
+// console.log(ul);
+// detailArray.forEach((item) => {
+// let li = document.createElement('li');
+// li.textContent = item;
+// ul.appendChild(li);
+// });
     
-	//dataDiv.appendChild(ul);
+	// dataDiv.appendChild(ul);
 }
 
 function displayNotFound(){
@@ -80,8 +82,9 @@ function displayNotFound(){
     dataDiv.textContent = 'Entry not found';
 }
 
-
 function createEntry(gratitude) {
+
+	//TODO: each time a new entry is made, make a new row and append to the table 
 	let gratitudeJson = JSON.stringify(gratitude);
 	let xhr = new XMLHttpRequest();
 	xhr.open('POST', 'api/gratitudes');
@@ -106,7 +109,7 @@ function createEntry(gratitude) {
 	}
 	xhr.send(gratitudeJson);
 	console.log(gratitudeJson);
-	getAllEntries();
+	
 }
 
 function getAllEntries(){
@@ -120,7 +123,7 @@ function getAllEntries(){
             let  gratitudeJson = xhr.responseText;
             let entriesObj = JSON.parse(gratitudeJson);
             console.log(entriesObj);
-            displayAllEntries();
+            displayAllEntries(entriesObj);
         	}
         	else if (xhr.status === 404){
         		displayEvent(null);
@@ -131,9 +134,55 @@ function getAllEntries(){
     xhr.send();
 }
 
-function displayAllEntries(){
+ function displayAllEntries(entriesObj){
+	let table = document.createElement('table');
+	let tableHead = document.createElement('thead');
+	let tableHeaderRow = document.createElement('tr');
+	let tableHeaderRowDate = document.createElement('th');
+	let tableHeaderRowFirst = document.createElement('th');
+	let tableHeaderRowSecond = document.createElement('th');
+	let tableHeaderRowThird = document.createElement('th');
 
+	tableHeaderRowDate.textContent = 'Date';
+	tableHeaderRowFirst.textContent = 'First Gratitude';
+	tableHeaderRowSecond.textContent = 'Second Gratitude';
+	tableHeaderRowThird.textContent = 'Third Gratitude';
+  	tableHeaderRow.appendChild(tableHeaderRowDate);
+  	tableHeaderRow.appendChild(tableHeaderRowFirst);
+	  tableHeaderRow.appendChild(tableHeaderRowSecond);
+	  tableHeaderRow.appendChild(tableHeaderRowThird);
+  	tableHead.appendChild(tableHeaderRow);
+	  table.appendChild(tableHead);
+	  
+	  // create tbody, then loop over states to create each tr and tds for
+		// name and abbr
+  let tableBody = document.createElement('tbody');
+  entriesObj.forEach((item) => {
+    // create table row and table data
+    let tableRow = document.createElement('tr');
+    let tableRowDate = document.createElement('td');
+    let tableRowFirst = document.createElement('td');
+	let tableRowSecond = document.createElement('td');
+	let tableRowThird = document.createElement('td');
+    // console.log(item['abbr']);
+    tableRowDate.textContent = item['entryDate'];
+    tableRowFirst.textContent = item['firstGrat'];
+	tableRowSecond.textContent = item['secondGrat']; 
+	tableRowThird.textContent = item['thirdGrat'];
+    // attach table data to table row, then the row to the overall body
+    tableRow.appendChild(tableRowDate);
+    tableRow.appendChild(tableRowFirst);
+	tableRow.appendChild(tableRowSecond);
+	tableRow.appendChild(tableRowThird);
+    tableBody.appendChild(tableRow);
+  });
+  tableBody.border = '5px teal';
+  table.border = '5 px solid black';
+  table.appendChild(tableBody);
+  document.body.appendChild(table);
 }
+
+
 
 	
 
