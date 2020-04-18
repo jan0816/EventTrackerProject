@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta charset="UTF-8">
+<title>Gratitude Tracker</title>
+<script src="js/script.js">
+	
+</script>
+</head>
+<body>
+	<h1> Daily Gratitudes Tracker</h1>
+	
+	<!-- TODO: New Event Form -->
+	<form name="gratitudeForm">
+	<input type="number" name="gratId">
+    <button name="lookup">Get Gratitude by Id</button>
+  </form>
+
+  	<!-- SHOWS EVENT DETAILS -->
+	<div id="eventData">
+		<form name="newEntry">
+		<input type="text" name="gratitudeFirstGrat" placeholder="First Gratitude">
+		<input type="text" name="gratitudeSecondGrat" placeholder="Second Gratitude">
+		<input type="text" name="gratitudeThirdGrat" placeholder="Third Gratitude">
+		<button name= "entryDetails"> Submit Entry</button>
+		</form>
+	</div>
+	<!-- TODO: List all events when page loads? -->
+	<div id="listEvents"></div>
+
+	<!-- TODO: Search field and button -->
+	<div id="search"></div>
+	<!-- TODO: Event details div with update/delete buttons?-->
+	<div id="eventDetails"></div>
+	
+	
+
+
+	<!-- TODO: Edit Event Form /PUT request -->
+	<div id="editForm"></div>
+
+</body>
+</html>

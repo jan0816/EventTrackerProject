@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 public class Gratitude {
 	
@@ -24,6 +26,7 @@ public class Gratitude {
 	@Column(name = "third_gratitude")
 	private String thirdGrat;
 	@Column(name = "entry_date")
+	@CreationTimestamp
 	private LocalDate entryDate;
 
 	// METHODS BEGIN:
