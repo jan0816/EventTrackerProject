@@ -65,16 +65,6 @@ function getEvent(gratId) {
       thirdBlock.textContent = 'Third Gratitude: ' +  gratitude.thirdGrat;
       dataDiv.appendChild(thirdBlock);
       console.log(dataDiv);
-     
-// let ul = document.createElement('ul');
-// console.log(ul);
-// detailArray.forEach((item) => {
-// let li = document.createElement('li');
-// li.textContent = item;
-// ul.appendChild(li);
-// });
-    
-	// dataDiv.appendChild(ul);
 }
 
 function displayNotFound(){
@@ -149,39 +139,38 @@ function getAllEntries(){
 	tableHeaderRowThird.textContent = 'Third Gratitude';
   	tableHeaderRow.appendChild(tableHeaderRowDate);
   	tableHeaderRow.appendChild(tableHeaderRowFirst);
-	  tableHeaderRow.appendChild(tableHeaderRowSecond);
-	  tableHeaderRow.appendChild(tableHeaderRowThird);
+	tableHeaderRow.appendChild(tableHeaderRowSecond);
+	tableHeaderRow.appendChild(tableHeaderRowThird);
   	tableHead.appendChild(tableHeaderRow);
-	  table.appendChild(tableHead);
+	table.appendChild(tableHead);
 	  
-	  // create tbody, then loop over states to create each tr and tds for
-		// name and abbr
-  let tableBody = document.createElement('tbody');
-  entriesObj.forEach((item) => {
-    // create table row and table data
+	let tableBody = document.createElement('tbody');
+	entriesObj.forEach((item) => {
+ 
     let tableRow = document.createElement('tr');
     let tableRowDate = document.createElement('td');
     let tableRowFirst = document.createElement('td');
 	let tableRowSecond = document.createElement('td');
 	let tableRowThird = document.createElement('td');
-    // console.log(item['abbr']);
+
     tableRowDate.textContent = item['entryDate'];
     tableRowFirst.textContent = item['firstGrat'];
 	tableRowSecond.textContent = item['secondGrat']; 
 	tableRowThird.textContent = item['thirdGrat'];
-    // attach table data to table row, then the row to the overall body
+
     tableRow.appendChild(tableRowDate);
     tableRow.appendChild(tableRowFirst);
 	tableRow.appendChild(tableRowSecond);
 	tableRow.appendChild(tableRowThird);
     tableBody.appendChild(tableRow);
   });
-  tableBody.border = '5px teal';
-  table.border = '5 px solid black';
-  table.appendChild(tableBody);
-  document.body.appendChild(table);
+	tableBody.border = '3px';
+	table.border = '5px';
+	table.appendChild(tableBody);
+	document.body.appendChild(table);
 }
 
+ 
 
 
 	
