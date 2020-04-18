@@ -14,13 +14,13 @@
 <body>
 	<h1> Daily Gratitudes Tracker</h1>
 	
-	<!-- TODO: New Event Form -->
+	<!-- TODO: GET BY ID -->
 	<form name="gratitudeForm">
 	<input type="number" name="gratId">
     <button name="lookup">Get Gratitude by Id</button>
   </form>
 
-  	<!-- SHOWS EVENT DETAILS -->
+  	<!-- SHOWS EVENT DETAILS  & MAKE NEW ENTRY-->
 	<div id="eventData">
 		<form name="newEntry">
 		<input type="text" name="gratitudeFirstGrat" placeholder="First Gratitude">
@@ -30,12 +30,14 @@
 		</form>
 	</div>
 	<!-- TODO: List all events when page loads? -->
-	<div id="listEvents"></div>
+	<div id="listAllEvents"></div>
+	
 
 	<!-- TODO: Search field and button -->
 	<div id="search"></div>
 	<!-- TODO: Event details div with update/delete buttons?-->
 	<div id="eventDetails"></div>
+	<button name= "updateEntry"> Update Entry</button>	<button name= "deleteEntry"> Delete Entry</button>
 	
 	
 

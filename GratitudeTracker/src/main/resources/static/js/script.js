@@ -106,5 +106,34 @@ function createEntry(gratitude) {
 	}
 	xhr.send(gratitudeJson);
 	console.log(gratitudeJson);
+	getAllEntries();
 }
+
+function getAllEntries(){
+	var xhr = new XMLHttpRequest();
+	
+    xhr.open('GET', 'api/gratitudes/' );
+    xhr.onreadystatechange = function() {
+    	
+        if (xhr.readyState === 4) {
+        	if(xhr.status === 200) {
+            let  gratitudeJson = xhr.responseText;
+            let entriesObj = JSON.parse(gratitudeJson);
+            console.log(entriesObj);
+            displayAllEntries();
+        	}
+        	else if (xhr.status === 404){
+        		displayEvent(null);
+        		console.log('Entry not found.');
+        	}
+        } 
+    };
+    xhr.send();
+}
+
+function displayAllEntries(){
+
+}
+
+	
 
