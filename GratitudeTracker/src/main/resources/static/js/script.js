@@ -1,7 +1,7 @@
 window.addEventListener('load', function (e) {
 	console.log('Window loaded.')
 	init();
-getAllEntries();
+//getAllEntries();
 });
 
 function init(){
@@ -12,6 +12,9 @@ function init(){
 	            getEvent(gratId);
 	        }
 	    });
+	 
+	 getAllEntries();
+	 
 	 document.newEntry.entryDetails.addEventListener('click', function(e){
 	        e.preventDefault();
 			console.log('You clicked to submit an entry.');
@@ -39,11 +42,10 @@ function getEvent(gratId) {
         }
         if (xhr.readyState === 4 && xhr.status >= 400) {
             console.error(xhr.status + ': ' + xhr.responseText);
-            
             displayNotFound();
         }
     };
-    xhr.send(null);
+    xhr.send();
 }
 
  function displayEvent(gratitude) {
@@ -53,7 +55,7 @@ function getEvent(gratId) {
     let h1 = document.createElement("h1");
     h1.textContent =  gratitude.entryDate;
       dataDiv.appendChild(h1);
-      
+    
       let firstBlock = document.createElement('blockquote');
       firstBlock.textContent = "First Gratitude: " + gratitude.firstGrat;
       dataDiv.appendChild(firstBlock);
@@ -66,6 +68,7 @@ function getEvent(gratId) {
       console.log(dataDiv);
 }
 
+ 
 function displayNotFound(){
     var dataDiv = document.getElementById('eventData');
     dataDiv.textContent = 'Entry not found';
@@ -192,11 +195,12 @@ function getAllEntries(){
 	table.appendChild(tableBody);
 	document.body.appendChild(table);
 })
+ }
 
  
  function detailView(gratitude){
 
-	let dataDiv = document.getElementById('entryEdits');
+	let dataDiv = document.getElementById('eventData');
 	dataDiv.textContent = '';
 	
 	// displays and appends entry details
@@ -217,106 +221,107 @@ function getAllEntries(){
 	editForm.name = "editEntry";
 	dataDiv.appendChild(editForm);
 	
-	let gratId = document.createElement("input");
-	gratId.setAttribute("type", "hidden");
-	gratId.setAttribute("name", "gratId");
-	gratId.value = gratitude.id;
-	editForm.appendChild(gratId);
+	//CHECK ID?
+	let elementId = document.createElement("input");
+	elementId.setAttribute("type", "hidden");
+	elementId.setAttribute("name", "id");
+	elementId.value = event.id;
+	editForm.appendChild(elementId);
 	
 	let firstGratLabel = document.createElement("label");
 	firstGratLabel.textContent = "First Gratitude";
 	editForm.appendChild(firstGratLabel);
+	
 	let firstGratInput = document.createElement("input");
 	firstGratInput.setAttribute("type", "text");
 	firstGratInput.setAttribute("name", "First Gratitude");
 	firstGratInput.value = gratitude.firstGrat;
 	editForm.appendChild(firstGratInput);
 	
+	let lineBreak = document.createElement("br");
+	editForm.appendChild(lineBreak);
+	
 	let secondGratLabel = document.createElement("label");
 	secondGratLabel.textContent = "Second Gratitude";
 	editForm.appendChild(secondGratLabel);
+	
 	let secondGratInput = document.createElement("input");
 	secondGratInput.setAttribute("type", "text");
 	secondGratInput.setAttribute("name", "Second Gratitude");
 	secondGratInput.value = gratitude.secondGrat;
 	editForm.appendChild(secondGratInput);
 	
+	let lineBreak2 = document.createElement("br");
+	editForm.appendChild(lineBreak2);
+	
 	let thirdGratLabel = document.createElement("label");
 	thirdGratLabel.textContent = "Third Gratitude";
 	editForm.appendChild(thirdGratLabel);
+	
 	let thirdGratInput = document.createElement("input");
 	thirdGratInput.setAttribute("type", "text");
 	thirdGratInput.setAttribute("name", "Third Gratitude");
 	thirdGratInput.value = gratitude.thirdGrat;
 	editForm.appendChild(thirdGratInput);
 	
-	editEntry();
-	};	
-	}
-
-	function editEntry(){
+	let lineBreak3 = document.createElement("br");
+	editForm.appendChild(lineBreak3);
+	
+		let submitButton = document.createElement("input");
+		submitButton.setAttribute("type", "submit");
+		submitButton.setAttribute("name", "submit");
+		submitButton.value = "Edit Entry"
+		editForm.appendChild(submitButton);
+		submitButton.addEventListener("click", updateEntry);
 		
-//		let submitButton = document.createElement("input");
-//		submitButton.setAttribute("type", "submit");
-//		submitButton.setAttribute("name", "submit");
-//		submitButton.value = "Edit Entry"
-//		editForm.appendChild( submitButton);
-//		
-//		let deleteButton = document.createElement("input");
-//		deleteButton.setAttribute("type", "submit");
-//		deleteButton.setAttribute("name", "delete");
-//		deleteButton.value = "Delete Entry"
-//		editForm.appendChild(deleteButton);
-//		deleteButton.addEventListener("click", deleteEntry);
-//		
-//
-//		submitButton.addEventListener("click", function (e){
-//		e.preventDefault();
-//		 let form = e.target.parentElement;
-//				
-//		 	let gratitude = {
-//			firstGrat: form.gratitudeFirstGrat,
-//			secondGrat: form.gratitudeSecondGrat,
-//			thirdGrat: form.gratitudeThirdGrat,
-//			};
-//		
-//		let gratitudeJson = JSON.stringify(gratitude);
-		let xhr = new XMLHttpRequest();
-		xhr.open('PUT', 'api/gratitudes/' + form.gratId.value, true);
+		let deleteButton = document.createElement("input");
+		deleteButton.setAttribute("type", "submit");
+		deleteButton.setAttribute("name", "delete");
+		deleteButton.value = "Delete Entry"
+		editForm.appendChild(deleteButton);
+		deleteButton.addEventListener("click", deleteEntry);
+}
+
+//WORKING ON THIS STILL
+function updateEntry(e, gratitude){
+		e.preventDefault();
+		 let form = e.target.parentElement;
+		 	
+		var xhr = new XMLHttpRequest();
+		//FIGURE OUT WHAT THE CORRECT FORM PATH IS
+		xhr.open('PUT', 'api/gratitudes/' + gratitude);
 		xhr.setRequestHeader('Content-type', 'application/json');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
-				switch (xhr.status) {
-				case 200:
-				case 201:
-					gratitudeJson = xhr.responseText;
-					let gratitude = JSON.parse(gratitudeJson);
-					displayEvent(gratitude);
-					break;
-				case 400:
-					displayNotFound("Invalid entry data: " + gratitudeJson);
-					break;
-				default:
-					displayNotFound("Error occurred: " + xhr.status);
-					break;
+				if(xhr.status == 200 || xhr.status == 201){
+					var gratitude = JSON.parse(xhr.responseText);
+					console.log(gratitude);
+					getAllEntries();
+				} else {
+					console.log("POST request failed.");
+					console.error(xhr.status + ": " + xhr.responseText);
+					}
 				}
-			}
 		};
-		xhr.send(gratitudeJson);
-		console.log(gratitudeJson);
-		})	
-}; 
- 
+		 var gratitude = {
+					firstGrat: form.firstGrat,
+					secondGrat: form.secondGrat,
+					thirdGrat: form.thirdGrat,
+			}	
+
+var gratitudeJson = JSON.stringify(gratitude);
+xhr.send(gratitudeJson);
+ }
+
  function deleteEntry(e){
 	 e.preventDefault();
-	 let deleteForm = e.target.parentElement;
+	 let form = e.target.parentElement;
 	 
 	 var xhr = new XMLHttpRequest();
-	 xhr.open('DELETE', 'api/gratitudes/' + deleteForm.gratId.value, true);
+	 xhr.open('DELETE', 'api/gratitudes/' + form.gratId.value, true);
 		xhr.setRequestHeader('Content-type', 'application/json');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
-				deleteForm.reset();
 				if (xhr.status ==200 || xhr.status == 204){
 					console.log("Successfully deleted entry.")
 					getAllEntries();
