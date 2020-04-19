@@ -180,44 +180,65 @@ function getAllEntries(){
 	tableRow.appendChild(tableRowThird);
     tableBody.appendChild(tableRow);
     
-	tableRow.addEventListener('click', function(){
+	tableRow.addEventListener('click', function(e){
 		detailView(gratitude);
-		
-	})
-  });
+		this.style.backgroundColor = "yellow";
+		}
+	);
+	
+
 	tableBody.border = '3px';
 	table.border = '5px';
 	table.appendChild(tableBody);
 	document.body.appendChild(table);
-}
+})
  
-// function detailView(gratitude){
-//	 let elements = document.getElementById('gratTable');
-//	 for (var i = 0; i < elements.length; i++) {
-//	   elements[i].textContent = gratitudes[i].firstGrat;
-//	   elements[i].addEventListener('click', function(e){
-//	     
-//		   console.log(this.id + e.target);
-//		   
-//		    let first = document.querySelector('firstGrat');
-//		    let second = document.querySelector('secondGrat');
-//		    let third = document.querySelector('thirdGrat');
-//		 
-//		    first.textContent = gratitudes[this.id].firstGrat;
-//		    second.textContent = gratitudes[this.id].secondGrat;
-//		    third.textContent = gratitudes[this.id].thirdGrat;
-//		    let firstGratitudes = document.getElementById('eventData');
-//		    for (var i = 0; i < firstGratitudes.length; i++) {
-//		      firstGratitudes[i].style.backgroundColor = "white";
-//		    }
-//		    this.style.backgroundColor = "green";
-//	   });
-//	 }
-// }
- 
-
- 
-
-
+ function detailView(gratitude){
+//	     e.preventDefault();
+			console.log('You clicked to edit an entry.');
+		
+	let singleEntryData = document.getElementById('eventData');
+	singleEntryData.textContent = '';
+	
+	//displays and appends entry details
+	let firstEntryBlock = document.createElement('p');
+	firstEntryBlock.textContent = gratitude.gratitude;
+	singleEntryData.appendChild(firstEntryBlock);
+	
+	let secondEntryBlock = document.createElement('p');
+	secondEntryBlock.textContent = gratitude.gratitude;
+	singleEntryData.appendChild(secondEntryBlock);
+	
+	let thirdEntryBlock = document.createElement('p');
+	firstEntryBlock.textContent = gratitude.gratitude;
+	singleEntryData.appendChild(thirdEntryBlock);
 	
 
+	// edit and delete button event listeners
+	let editButton = document.createElement('button');
+	editButton.textContent = "Edit Entry";
+
+	let deleteButton = document.createElement('button');
+	deleteButton.textContent = "Delete Entry";
+
+
+	editButton.addEventListener('click', function (e) {
+		e.preventDefault();
+		//editEntries method goes here?
+		getAllEntries();
+
+	});
+
+	deleteButton.addEventListener('click', function (e) {
+		e.preventDefault();
+		
+		singleWorkoutData.textContent = '';
+		getAllEntries();
+	});
+
+	// append the buttons to the entry detail
+	singleEntryData.appendChild(editButton);
+	singleEntryData.appendChild(deleteButton);
+}
+ 
+ } 
