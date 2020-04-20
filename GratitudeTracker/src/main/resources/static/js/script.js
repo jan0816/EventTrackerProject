@@ -204,15 +204,15 @@ function getAllEntries(){
 	dataDiv.textContent = '';
 	
 	// displays and appends entry details
-	let firstEntryBlock = document.createElement('text');
+	let firstEntryBlock = document.createElement('p');
 	firstEntryBlock.textContent = "First gratitude: " + gratitude.firstGrat;
 	dataDiv.appendChild(firstEntryBlock);
 	
-	let secondEntryBlock = document.createElement('text');
+	let secondEntryBlock = document.createElement('p');
 	secondEntryBlock.textContent = "Second gratitude: " + gratitude.secondGrat;
 	dataDiv.appendChild(secondEntryBlock);
 	
-	let thirdEntryBlock = document.createElement('text');
+	let thirdEntryBlock = document.createElement('p');
 	firstEntryBlock.textContent = "Third gratitude: " + gratitude.thirdGrat;
 	dataDiv.appendChild(thirdEntryBlock);
 	console.log(dataDiv);
@@ -234,7 +234,7 @@ function getAllEntries(){
 	
 	let firstGratInput = document.createElement("input");
 	firstGratInput.setAttribute("type", "text");
-	firstGratInput.setAttribute("name", "First Gratitude");
+	firstGratInput.setAttribute("name", "firstGratitude");
 	firstGratInput.value = gratitude.firstGrat;
 	editForm.appendChild(firstGratInput);
 	
@@ -247,7 +247,7 @@ function getAllEntries(){
 	
 	let secondGratInput = document.createElement("input");
 	secondGratInput.setAttribute("type", "text");
-	secondGratInput.setAttribute("name", "Second Gratitude");
+	secondGratInput.setAttribute("name", "secondGratitude");
 	secondGratInput.value = gratitude.secondGrat;
 	editForm.appendChild(secondGratInput);
 	
@@ -260,7 +260,7 @@ function getAllEntries(){
 	
 	let thirdGratInput = document.createElement("input");
 	thirdGratInput.setAttribute("type", "text");
-	thirdGratInput.setAttribute("name", "Third Gratitude");
+	thirdGratInput.setAttribute("name", "thirdGratitude");
 	thirdGratInput.value = gratitude.thirdGrat;
 	editForm.appendChild(thirdGratInput);
 	
@@ -283,13 +283,13 @@ function getAllEntries(){
 }
 
 //WORKING ON THIS STILL
-function updateEntry(e, gratitude){
+function updateEntry(e){
 		e.preventDefault();
 		 let form = e.target.parentElement;
-		 	
+		 
 		var xhr = new XMLHttpRequest();
-		//FIGURE OUT WHAT THE CORRECT FORM PATH IS
-		xhr.open('PUT', 'api/gratitudes/' + gratitude);
+		//FIGURE OUT WHAT THE CORRECT FORM PATH IS SINCE PROPERTY IS UNDEFINED
+		xhr.open('PUT', 'api/gratitudes/' + form.id.value);
 		xhr.setRequestHeader('Content-type', 'application/json');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
@@ -303,10 +303,11 @@ function updateEntry(e, gratitude){
 					}
 				}
 		};
+		//WHY ARE THESE VALUES UNDEFINED?
 		 var gratitude = {
-					firstGrat: form.firstGrat,
-					secondGrat: form.secondGrat,
-					thirdGrat: form.thirdGrat,
+					firstGrat: form.firstGratitude.value,
+					secondGrat: form.secondGratitude.value,
+					thirdGrat: form.thirdGratitude.value,
 			}	
 
 var gratitudeJson = JSON.stringify(gratitude);
