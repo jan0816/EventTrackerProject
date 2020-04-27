@@ -1,0 +1,79 @@
+<br>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="container bg-img">
+    <h1 class="display-4" style="text-align:center;">{{title | uppercase}}</h1>
+    <p class="lead"></p>
+  </div>
+  </div>
+</div>
+<!-- <h1 style="text-align: center;">{{title}}</h1><hr> -->
+
+<div *ngIf="!selected">
+  <form class="form form-group inline">
+    <input class="form-control" type="text" name="firstGrat" [(ngModel)]="newGratitude.firstGrat" placeholder="First Gratitude"/><br>
+    <input class="form-control" type="text" name="secondGrat" [(ngModel)]="newGratitude.secondGrat" placeholder="Second Gratitude"/><br>
+    <input class="form-control" type="text" name="thirdGrat" [(ngModel)]="newGratitude.thirdGrat" placeholder="Third Gratitude"/> <br>
+    <input class="btn btn-info" type="submit" (click)="createEntry(newGratitude)" value="Add Gratitude Entries"/><br>
+  </form>
+
+  <hr>
+
+  <table class="table table-info table-hover">
+    <thead class="thead thead-primary">
+     <tr>
+        <th> # </th>
+        <th>Entry Date</th>
+        <th>First Gratitude</th>
+        <th>Second Gratitude</th>
+        <th>Third Gratitude</th>
+        <th> Delete </th>
+       </tr>
+    </thead>
+    <tbody>
+   <tr *ngFor="let gratitude of gratitudes" (click)="displayGratitude(gratitude)">
+       <td><input type="number" name="id" [(ngModel)]="gratitude.id"></td>
+       <td><input type="date" name="entryDate" [(ngModel)]="gratitude.entryDate"></td>
+       <td><input type="text" name="firstGrat" [(ngModel)]="gratitude.firstGrat"></td>
+       <td><input type="text" name="secondGrat" [(ngModel)]="gratitude.secondGrat"></td>
+       <td><input type="text" name="thirdGrat" [(ngModel)]="gratitude.thirdGrat"></td>
+    <!-- <td>(change)="updateEntry(gratitude)"></td> -->
+     <td><input class="btn btn-danger" type="submit" (click)="deleteEntry(gratitude.id)" value="Delete Entry"></td>
+   </tr>
+  </tbody>
+  </table>
+</div>
+<hr>
+
+
+
+
+    <div *ngIf="selected">
+    <br>
+   <p> Id: {{selected.id}}<br>
+    Entry Date: {{selected.entryDate}}<br>
+    First Gratitude: {{selected.firstGrat}}<br>
+    Second Gratitude: {{selected.secondGrat}}<br>
+    Third Gratitude: {{selected.thirdGrat}}</p>
+    <br>
+    <input class="btn btn-info" type="submit" (click)="setEditGratitude()" value="Edit"/><br>
+    <button class="btn btn-dark" (click)="displayTable()">Display Table</button><br>
+<hr>
+    <form *ngIf="editGratitude">
+      <input type="text" name="firstGrat" [(ngModel)]="editGratitude.firstGrat" placeholder="First Gratitude"/><br>
+      <input type="text" name="secondGrat" [(ngModel)]="editGratitude.secondGrat" placeholder="Second Gratitude"/><br>
+      <input type="text" name="thirdGrat" [(ngModel)]="editGratitude.thirdGrat" placeholder="Third Gratitude"/><br>
+      <!-- <input type="date" name="entryDate" [(ngModel)]="editGratitude.entryDate" placeholder="Entry Date"/><br> -->
+      <input class="btn btn-info" type="submit" (click)="updateEntry(editGratitude)" value="Save"/>
+      <input class="btn btn-dark" type="submit" (click)="editGratitude = null" value="Cancel"/><br>
+    </form>
+
+    <!-- <button class="btn btn-dark" type="submit" (click)="selected = null" value="Back">Back</button> -->
+
+  <br>
+
+
+
+  </div>
+

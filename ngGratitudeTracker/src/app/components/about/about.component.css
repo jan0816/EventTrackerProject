@@ -1,0 +1,71 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: center;
+  width: 45%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 6px;
+  border-radius: 15px;
+  margin-left: 50px;
+
+}
+
+.about-section {
+  padding: 50px;
+  max-width: auto;
+  text-align: center;
+  text-shadow: 1px 1px #094654 ;
+  background-color: #86163D  ;
+  color: white;
+  border-radius: 20px;
+  font-family: Didot;
+}
+
+.container {
+  padding: 5 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+  font-family: Copperplate;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
